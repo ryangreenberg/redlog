@@ -11,6 +11,9 @@ def hello():
 
 @app.route('/v1/<username>/read', methods=['GET'])
 def show_read_items(username):
+  if 'If-Modified-Since' in request.headers:
+    since = request.headers['If-Modified-Since']
+
   return "This is a list of things that %s has read" % username
 
 @app.route('/v1/<username>/read', methods=['POST'])
