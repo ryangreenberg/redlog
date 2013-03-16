@@ -6,7 +6,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return 'redlog'
+  return 'redlog'
+
+@app.route('/v1/<username>/read', methods=['GET'])
+def show_read_items(username):
+  return "This is a list of things that %s has read" % username
+
+@app.route('/v1/<username>/read', methods=['POST'])
+def add_read_item(username):
+  return "Reading item"
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
