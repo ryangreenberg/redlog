@@ -2,6 +2,7 @@
 import os
 from flask import Flask
 from flask import request
+from flask import Response
 
 app = Flask(__name__)
 
@@ -12,17 +13,23 @@ def hello():
 @app.route('/v1/<username>/read', methods=['GET'])
 def show_read_items(username):
   if 'If-Modified-Since' in request.headers:
-    since = request.headers['If-Modified-Since']
+    since_header = request.headers['If-Modified-Since']
+    since = datetime.datetime.fromtimestamp( email.utils.mktime_tz(email.utils.parsedate_tz( since_header )), pytz.utc )
     # TODO: only return results that have timestamps after `since`
-
-  return "This is a list of things that %s has read" % username
+  
+  resp_str = "This is a list of things that %s has read" % username
+  resp = Response(resp_str, status=200, mimetype='application/json')
+  return resp
 
 @app.route('/v1/<username>/read', methods=['POST'])
 def add_read_item(username):
   if 'item' in request.form:
-    return "Reading %s..." % request.form['item']
+    resp_str = "Reading %s..." % request.form['item']
   else:
-    return "Nothing to read."
+    resp_str = "Nothing to read."
+  
+  resp = Response(resp_str, status=200, mimetype='application/json')
+  return resp
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
