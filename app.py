@@ -1,6 +1,7 @@
 # From https://devcenter.heroku.com/articles/python
 import os
 from flask import Flask
+from flask import request
 
 app = Flask(__name__)
 
@@ -14,7 +15,10 @@ def show_read_items(username):
 
 @app.route('/v1/<username>/read', methods=['POST'])
 def add_read_item(username):
-  return "Reading item"
+  if 'item' in request.form:
+    return "Reading %s..." % request.form['item']
+  else:
+    return "Nothing to read."
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
