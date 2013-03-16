@@ -3,12 +3,15 @@ import os
 from flask import Flask
 from flask import request
 from flask import Response
+from flask import render_template
 
 app = Flask(__name__)
+app.debug = True
 
 @app.route('/')
 def hello():
-  return 'redlog'
+  template_vars = {'num_items' : 42}  # obviously this number is currently fake
+  return render_template('index.html', num_items=42)
 
 @app.route('/v1/<username>/read', methods=['GET'])
 def show_read_items(username):
