@@ -3,6 +3,11 @@ redlog
 
 What you've read, everywhere
 
+## API Specification
+
+`POST /v1/:username/read/`
+
+`GET /v1/:username/read/`
 
 ## Nick's speculative notes
 
