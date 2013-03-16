@@ -6,7 +6,7 @@ What you've read, everywhere
 
 ## Nick's speculative notes
 
-[HTTP authentication, specifying user: npdoty]
+	[HTTP authentication, specifying user: npdoty]
 	POST https://hostname/v1/read/
 	{ user: 'npdoty',
 	 read: [ 'guid-of-an-ATOM-feed-item-12345678',
@@ -18,7 +18,8 @@ What you've read, everywhere
 	 client-device: 'npdoty's MacBook Air'
 	}
 
-[HTTP authentication, specifying user: npdoty]
+
+	[HTTP authentication, specifying user: npdoty]
 	GET https://hostname/v1/read/
 	If-Modified-Since: Sat, 29 Oct 2012 19:43:31 GMT
 	Accept: application/json
@@ -33,6 +34,7 @@ What you've read, everywhere
 	            'http://twitter.com/status/12345678' ]
 	} 
 	// that's all, the client doesn't care when you read an item, just that you read it at some point since they last asked.
+
 
 Your clients (your local RSS client, your local Twitter client, your Web browser maybe, your phone's RSS client) all occasionally POST updates to hostname/v1/read/ when they have network access, to document when you read which things on the Web. Clients that want to avoid showing you things as unread will occasionally fetch (or often fetch with a conditional GET and get a quick 304 Unmodified response) to see which URLs and GUIDS you've already read. The server need not know anything about what subscriptions you have.
 
