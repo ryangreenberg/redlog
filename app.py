@@ -13,6 +13,7 @@ def hello():
 def show_read_items(username):
   if 'If-Modified-Since' in request.headers:
     since = request.headers['If-Modified-Since']
+    # TODO: only return results that have timestamps after `since`
 
   return "This is a list of things that %s has read" % username
 
