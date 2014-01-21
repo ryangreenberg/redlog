@@ -30,13 +30,12 @@ class ApiHandler(webapp2.RequestHandler):
       if self.request.content_type == 'application/json':
         update = json.loads(self.request.body)
         
-        if update.read and type(update.read) == type([]):
+        if update['read'] and type(update['read']) == type([]):
           pass
-        elif update.read and type(update.read) == type(''):
-          log = models.Log()
-          log.user = user
-          log.identifier = update.read
+        elif update['read'] and type(update['read']) == type(u""):
+          log = models.Log(identifier=update['read'], user=user)
           log.put()
+          response.body = json.dumps({'success': "Saved new redlog, kthxbai"})
         else:
           pass  # error condition, doesn't include a reading update
       else:
