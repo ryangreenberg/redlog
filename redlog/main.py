@@ -36,6 +36,7 @@ class ApiHandler(webapp2.RequestHandler):
           log = models.Log(identifier=update['read'], user=user)
           log.put()
           response.body = json.dumps({'success': "Saved new redlog, kthxbai"})
+          response.status = 201
         else:
           pass  # error condition, doesn't include a reading update
       else:
